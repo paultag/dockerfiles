@@ -2,10 +2,14 @@
 
 MODULES = acid hy lenin postgres snitch uwsgi
 
-all: $(MODULES)
+all: build
 
 clean:
 	for x in $(MODULES); do make -C $$x clean; done
+
+build: $(MODULES)
+
+rebuild: clean build
 
 hy:
 	make -C hy
