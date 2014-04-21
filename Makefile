@@ -30,4 +30,4 @@ uwsgi:
 	make -C uwsgi
 
 
-.PHONY: acid hy lenin postgres snitch uwsgi clean
+.PHONY: acid hy lenin postgres snitch uwsgi clean rebuild build
