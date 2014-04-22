@@ -1,2 +1,2 @@
-IMAGE_NAME = postgres-9.3
+IMAGE_NAME = postgres
 include ../lib/Dockerbuild.mk
