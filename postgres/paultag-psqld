@@ -12,7 +12,7 @@ fi
 
 chmod 0700 ${DATABASEDIR}
 
-if [ -e "${DATABASEDIR}/PG_VERSION" ]; then
+if [ ! -e "${DATABASEDIR}/PG_VERSION" ]; then
     # We need to set up the DB before we kickoff.
     /usr/lib/postgresql/${VERSION}/bin/initdb \
         -D ${DATABASEDIR}
