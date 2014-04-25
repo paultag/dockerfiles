@@ -10,4 +10,4 @@ RUN cd /opt/hylang/; git clone git://github.com/paultag/snitch.git
 RUN cd /opt/hylang/snitch; python3.4 /usr/bin/pip3 install -r requirements.txt
 RUN cd /opt/hylang/snitch; python3.4 /usr/bin/pip3 install -e .
 
-CMD ["hy"]
+CMD ["hy", "/snitch/default.hy"]
