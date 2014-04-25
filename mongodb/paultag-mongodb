@@ -1,0 +1,17 @@
+#!/bin/bash
+# Copyright (c) Paul R. Tagliamonte, MIT/Expat
+set -e
+
+DATABASEDIR="/var/lib/mongodb"
+DB_OWNER=$(stat -c "%U" ${DATABASEDIR})
+
+if [ "x${DB_OWNER}" != "xmongodb" ]; then
+    chown -R mongodb:mongodb ${DATABASEDIR}
+fi
+
+chmod 0700 ${DATABASEDIR}
+
+exec su \
+    -l mongodb \
+    -s "/bin/sh" \
+    -c "mongod --config /etc/mongodb.conf"
