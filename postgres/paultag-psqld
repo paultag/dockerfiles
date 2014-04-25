@@ -1,5 +1,6 @@
 #!/bin/bash
 # Copyright (c) Paul R. Tagliamonte, MIT/Expat
+set -e
 
 VERSION="9.3"  # XXX: Update this with the rest of the dockerfiles.
 DATABASEDIR="/var/lib/postgresql/${VERSION}/main"
@@ -14,8 +15,8 @@ chmod 0700 ${DATABASEDIR}
 
 if [ ! -e "${DATABASEDIR}/PG_VERSION" ]; then
     # We need to set up the DB before we kickoff.
-    /usr/lib/postgresql/${VERSION}/bin/initdb \
-        -D ${DATABASEDIR}
+    su -l postgres -c \
+        "/usr/lib/postgresql/${VERSION}/bin/initdb -D ${DATABASEDIR}"
 fi
 
 exec su -l postgres -c "
