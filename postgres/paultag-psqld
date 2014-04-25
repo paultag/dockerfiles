@@ -4,12 +4,21 @@
 VERSION="9.3"  # XXX: Update this with the rest of the dockerfiles.
 DATABASEDIR="/var/lib/postgresql/${VERSION}/main"
 
+DB_OWNER=$(stat -c "%U" ${DATABASEDIR})
 
-if [ ! -d ${DATABASEDIR} ]; then
-    # We need to set up the DB before we kickoff.
-    pg_ctl initdb -D ${DATABASEDIR}
+if [ "x${DB_OWNER}" != "xpostgres" ]; then
+    chown -R postgres:postgres ${DATABASEDIR}
 fi
 
-exec /usr/lib/postgresql/${VERSION}/bin/postgres \
+chmod 0700 ${DATABASEDIR}
+
+if [ -e "${DATABASEDIR}/PG_VERSION" ]; then
+    # We need to set up the DB before we kickoff.
+    /usr/lib/postgresql/${VERSION}/bin/initdb \
+        -D ${DATABASEDIR}
+fi
+
+exec su -l postgres -c "
+    /usr/lib/postgresql/${VERSION}/bin/postgres \
         -D ${DATABASEDIR} \
-        -c "config_file=/etc/postgresql/${VERSION}/main/postgresql.conf"
+        -c config_file=/etc/postgresql/${VERSION}/main/postgresql.conf"
