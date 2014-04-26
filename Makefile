@@ -1,6 +1,6 @@
 #
 
-MODULES = acid hy lenin postgres snitch uwsgi
+MODULES = $(shell ls | grep -v 'Makefile' | grep -v 'lib')
 
 all: build
 
@@ -11,8 +11,8 @@ build: $(MODULES)
 
 rebuild: clean build
 
-hy:
-	make -C hy
+$(MODULES):
+	make -C $@
 
 acid: hy
 	make -C acid
@@ -23,11 +23,4 @@ lenin: acid
 snitch: acid
 	make -C snitch
 
-postgres:
-	make -C postgres
-
-uwsgi:
-	make -C uwsgi
-
-
-.PHONY: acid hy lenin postgres snitch uwsgi clean rebuild build
+.PHONY: clean rebuild build $(MODULES)
