@@ -6,7 +6,6 @@ IMAGE_ID = $(NAMESPACE)/$(IMAGE_NAME)
 
 CURRENT_ID = $(shell docker.io images -q $(IMAGE_ID))
 IMAGE_BUILD = docker.io build \
-		          --no-cache=true \
 		          --rm=true \
 		          -t $(IMAGE_ID) \
 		          .
