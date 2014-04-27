@@ -7,6 +7,9 @@ all: build
 clean:
 	for x in $(MODULES); do make -C $$x clean; done
 
+push:
+	for x in $(MODULES); do make -C $$x push; done
+
 build: $(MODULES)
 
 rebuild: clean build

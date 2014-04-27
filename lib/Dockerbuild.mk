@@ -27,3 +27,10 @@ ifeq ($(CURRENT_ID),)
 else
 	docker.io rmi $(CURRENT_ID)
 endif
+
+push:
+ifeq ($(CURRENT_ID),)
+	@echo "$(IMAGE_ID) - nothing to push"
+else
+	docker.io push $(IMAGE_ID)
+endif
