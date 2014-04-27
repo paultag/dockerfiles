@@ -1,2 +1,2 @@
-IMAGE_NAME = snitch
+IMAGE_NAME = snitchd
 include ../lib/Dockerbuild.mk
