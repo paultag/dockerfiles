@@ -22,7 +22,7 @@ RUN cd /opt/hylang/hy; python2.7 /usr/bin/pip install -e .
 RUN cd /opt/hylang/snitch; python2.7 /usr/bin/pip install pymongo
 RUN cd /opt/hylang/snitch; python2.7 /usr/bin/pip install -r requirements-site.txt
 RUN cd /opt/hylang/snitch; python2.7 /usr/bin/pip install -e .
-RUN make -C /opt/hylang/snitch/web build
+RUN make -C /opt/hylang/snitch/web static
 
 ADD uwsgi.ini /etc/uwsgi/apps-enabled/
 CMD ["uwsgi", "--ini", "/etc/uwsgi/apps-enabled/uwsgi.ini"]
