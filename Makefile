@@ -20,7 +20,4 @@ $(MODULES):
 lenin:
 	make -C lenin
 
-snitch:
-	make -C snitch
-
 .PHONY: clean rebuild build $(MODULES)
