@@ -17,13 +17,10 @@ rebuild: clean build
 $(MODULES):
 	make -C $@
 
-acid: hy
-	make -C acid
-
-lenin: acid
+lenin:
 	make -C lenin
 
-snitch: acid
+snitch:
 	make -C snitch
 
 .PHONY: clean rebuild build $(MODULES)
