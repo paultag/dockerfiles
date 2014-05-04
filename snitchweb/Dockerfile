@@ -24,5 +24,7 @@ RUN cd /opt/hylang/snitch; python2.7 /usr/bin/pip install -r requirements-site.t
 RUN cd /opt/hylang/snitch; python2.7 /usr/bin/pip install -e .
 RUN make -C /opt/hylang/snitch/web static
 
+RUN adduser --system snitch
+
 ADD uwsgi.ini /etc/uwsgi/apps-enabled/
 CMD ["uwsgi", "--ini", "/etc/uwsgi/apps-enabled/uwsgi.ini"]
