@@ -12,6 +12,8 @@ fi
 chown -R root:root /etc/openvpn/*
 chmod 600 /etc/openvpn/*
 
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 \
+    -o eth0 -j MASQUERADE
 
 exec /usr/sbin/openvpn \
     --cd /etc/openvpn \
