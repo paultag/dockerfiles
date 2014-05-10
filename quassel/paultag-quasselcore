@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+QUASSELCORE="quasselcore"
+CONFIG_DIR="/quassel"
+
+
+if [ -e ${CONFIG_DIR}/quasselCert.pem ]; then
+    echo "quasselCert.pem already exists; using it."
+else
+    echo "quasselCert.pem not present; creating it."
+    openssl req \
+        -x509 -nodes -days 365 \
+        -newkey rsa:4096 \
+        -keyout ${CONFIG_DIR}/quasselCert.pem \
+        -out ${CONFIG_DIR}/quasselCert.pem
+fi
+
+exec su -s /bin/bash -l quasselcore -c "quasselcore \
+    --configdir=/quassel \
+    --select-backend=PostgreSQL \
+    $@"
