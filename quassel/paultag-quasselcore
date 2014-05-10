@@ -16,6 +16,12 @@ else
         -out ${CONFIG_DIR}/quasselCert.pem
 fi
 
+QUASSEL_OWNER=$(stat -c "%U" ${CONFIG_DIR})
+
+if [ "x${QUASSEL_OWNER}" != "xquasselcore" ]; then
+    chown -R quasselcore:quassel ${CONFIG_DIR}
+fi
+
 exec su -s /bin/bash -l quasselcore -c "quasselcore \
     --configdir=/quassel \
     $@"
