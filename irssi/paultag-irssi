@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+IRSSI_DIR="/irssi"
+IRSSI_OWNER=$(stat -c "%U" ${IRSSI_DIR})
+
+if [ "x${IRSSI_OWNER}" != "xirssi" ]; then
+    chown -R irssi:irssi ${IRSSI_DIR}
+fi
+
+
+if [ ! -d ${IRSSI_DIR}/.irssi ]; then
+
+    mkdir ${IRSSI_DIR}/.irssi/modules -p
+
+    cp /usr/lib/quassel_irssi/libquassel_core.so \
+        ${IRSSI_DIR}/.irssi/modules/
+
+    cat <<EOF > ${IRSSI_DIR}/.irssi/config
+chatnets = {
+    quassel_lucifer = {
+        type = "Quassel";
+    };
+};
+
+servers = (
+    {
+        address = "quassel.example.com";
+        port = "4242";
+        chatnet = "quassel_lucifer";
+        password="password";
+        use_ssl="yes";
+    }
+);
+
+settings = {
+    core = { nick = "paultag"; };
+}
+EOF
+
+    cat <<EOF > ${IRSSI_DIR}/.irssi/startup
+load quassel
+connect quassel_lucifer
+EOF
+fi
+
+exec su -l irssi -c "irssi"
