@@ -14,9 +14,15 @@ fi
 chmod 0700 ${DATABASEDIR}
 
 if [ ! -e "${DATABASEDIR}/PG_VERSION" ]; then
+    PW_FILE=$(mktemp)
+    echo "postgres" > ${PW_FILE}
+    chmod 666 ${PW_FILE}  # \m/
+
     # We need to set up the DB before we kickoff.
     su -l postgres -c \
-        "/usr/lib/postgresql/${VERSION}/bin/initdb -D ${DATABASEDIR}"
+        "/usr/lib/postgresql/${VERSION}/bin/initdb --pwfile=${PW_FILE} -D ${DATABASEDIR}"
+
+    rm ${PW_FILE}
 fi
 
 exec su -l postgres -c "
