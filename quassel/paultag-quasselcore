@@ -18,5 +18,4 @@ fi
 
 exec su -s /bin/bash -l quasselcore -c "quasselcore \
     --configdir=/quassel \
-    --select-backend=PostgreSQL \
     $@"

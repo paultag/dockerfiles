@@ -7,4 +7,4 @@ RUN apt-get update && apt-get install -y quassel-core libqt4-sql-psql
 
 ADD paultag-quasselcore /usr/local/bin/
 
-CMD ["/usr/local/bin/paultag-quasselcore"]
+CMD ["/usr/local/bin/paultag-quasselcore", "--select-backend=PostgreSQL"]
