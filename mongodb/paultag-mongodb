@@ -11,7 +11,6 @@ fi
 
 chmod 0700 ${DATABASEDIR}
 
-exec su \
-    -l mongodb \
+exec sudo -u mongodb \
     -s "/bin/sh" \
     -c "mongod --config /etc/mongodb.conf"

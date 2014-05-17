@@ -22,6 +22,6 @@ if [ "x${QUASSEL_OWNER}" != "xquasselcore" ]; then
     chown -R quasselcore:quassel ${CONFIG_DIR}
 fi
 
-exec su -s /bin/bash -l quasselcore -c "quasselcore \
+exec sudo -s /bin/bash -u quasselcore -c "quasselcore \
     --configdir=/quassel \
     $@"

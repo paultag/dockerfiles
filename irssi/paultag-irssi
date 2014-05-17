@@ -44,4 +44,4 @@ connect quassel_lucifer
 EOF
 fi
 
-exec su -l irssi -c "irssi"
+exec sudo -u irssi TERM=screen-256color irssi

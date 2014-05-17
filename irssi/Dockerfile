@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     libglib2.0-dev \
     libssl-dev \
+    sudo \
     irssi \
     irssi-dev \
     git \
