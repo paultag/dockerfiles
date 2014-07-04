@@ -3,7 +3,7 @@
 # VERSION   0.1
 FROM        debian:testing
 MAINTAINER  Paul R. Tagliamonte <paultag@debian.org>
-RUN apt-get update && apt-get install -y postgresql-9.3 sudo
+RUN apt-get update && apt-get install -y postgresql-9.3 postgresql-9.3-postgis-2.1 sudo
 
 ADD paultag-psqld /usr/local/bin/
 
