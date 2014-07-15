@@ -1,0 +1,18 @@
+[Unit]
+Description=kgb
+Author=Paul R. Tagliamonte <tag@pault.ag>
+Requires=docker.io.service
+
+[Service]
+Restart=always
+ExecStart=/bin/bash -c '/usr/bin/docker start -a kgb || \
+    /usr/bin/docker run \
+        -it \
+        --name kgb \
+        -v /srv/lucifer.pault.ag/prod/kgb/:/kgb/ \
+        -p 0.0.0.0:5391:5391/tcp \
+        paultag/kgb'
+ExecStop=/usr/bin/docker stop -t 5 kgb
+
+[Install]
+WantedBy=multi-user.target
