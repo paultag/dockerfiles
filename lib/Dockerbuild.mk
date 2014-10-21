@@ -10,6 +10,9 @@ IMAGE_BUILD = docker.io build \
 		          -t $(IMAGE_ID) \
 		          .
 
+rebuild:
+	$(IMAGE_BUILD)
+
 build:
 ifeq ($(CURRENT_ID),)
 	$(IMAGE_BUILD)
