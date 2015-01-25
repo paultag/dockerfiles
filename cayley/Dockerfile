@@ -13,5 +13,8 @@ ENV GOPATH /opt/cayley/gocode/
 WORKDIR /opt/cayley/
 RUN git clone git://github.com/google/cayley.git
 WORKDIR /opt/cayley/cayley/
-RUN go get
+
+RUN go get -d
 RUN go build
+
+ENTRYPOINT ["/opt/cayley/cayley/cayley"]
